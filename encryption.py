@@ -13,25 +13,43 @@ random.shuffle(key)
 encrypt_dict = {chars[i]: key[i] for i in range(len(chars))}
 decrypt_dict = {key[i]: chars[i] for i in range(len(chars))}
 
-# encrypt
-
-def encrypt(message):
-  return ''.join(encrypt_dict[char] for char in message if char in encrypt_dict)
+def main(): 
   
-plain_text = input("Enter a message to encrypt: ")
-cipher_text = encrypt(plain_text)
+  while True:
 
-print(f"Original message: {plain_text}")
-print(f"Encrypted message: {cipher_text}")
+    # encrypt
 
-# decrypt
+    def encrypt(message):
+      return ''.join(encrypt_dict[char] for char in message if char in encrypt_dict)
+      
+    plain_text = input("Enter a message to encrypt (or enter q for quit): ")
+    if plain_text.lower() == 'q':  # Exit if 'q' is entered
+            print("Exiting program.")
+            return
+          
+    cipher_text = encrypt(plain_text)
 
-def decrypt(message):
-  return ''.join(decrypt_dict[char] for char in message if char in decrypt_dict)
+    print("----------------------------------")
+    print(f"Original message: {plain_text}")
+    print(f"Encrypted message: {cipher_text}")
+    print("----------------------------------")
 
-cipher_text = input("Enter a message to decrypt: ")
-decrypted_text = decrypt(cipher_text)
+    # decrypt
 
-print(f"Encrypted message: {cipher_text}")
-print(f"Decrypted message: {decrypted_text}")
+    def decrypt(message):
+      return ''.join(decrypt_dict[char] for char in message if char in decrypt_dict)
+
+    cipher_text = input("Enter a message to decrypt (or enter q for quit): ")
+    if cipher_text.lower() == "q":
+      print("Exiting program. Goodbye!")
+      return
+
+    decrypted_text = decrypt(cipher_text)
+
+    print(f"Encrypted message: {cipher_text}")
+    print(f"Decrypted message: {decrypted_text}")
+    print("----------------------------------")
+  
+if __name__ == "__main__":
+  main()
 
