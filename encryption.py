@@ -10,27 +10,28 @@ random.shuffle(key)
 #print(f"chars: {chars}")
 #print(f"key: {key}")
 
+encrypt_dict = {chars[i]: key[i] for i in range(len(chars))}
+decrypt_dict = {key[i]: chars[i] for i in range(len(chars))}
+
 # encrypt
 
-plain_text = input("Enter a message to encrypt: ")
-cipher_text = ""
-
-for letter in plain_text:
-  index = chars.index(letter)
-  cipher_text += key[index]
+def encrypt(message):
+  return ''.join(encrypt_dict[char] for char in message if char in encrypt_dict)
   
-print(f"original message: {plain_text}")
-print(f"encrypted message: {cipher_text}")
+plain_text = input("Enter a message to encrypt: ")
+cipher_text = encrypt(plain_text)
+
+print(f"Original message: {plain_text}")
+print(f"Encrypted message: {cipher_text}")
 
 # decrypt
 
-cipher_text = input("Enter a message to decrypt: ")
-plain_text = ""
+def decrypt(message):
+  return ''.join(decrypt_dict[char] for char in message if char in decrypt_dict)
 
-for letter in cipher_text:
-  index = key.index(letter)
-  plain_text += chars[index]
-  
-print(f"encrypted message: {cipher_text}")
-print(f"decrypted message: {plain_text}")
+cipher_text = input("Enter a message to decrypt: ")
+decrypted_text = decrypt(cipher_text)
+
+print(f"Encrypted message: {cipher_text}")
+print(f"Decrypted message: {decrypted_text}")
 
